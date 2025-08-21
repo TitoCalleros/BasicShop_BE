@@ -14,6 +14,8 @@ builder.Services.AddFluentMigratorCore()
         .ScanIn(typeof(Program).Assembly).For.Migrations())
     .AddLogging(log => log.AddFluentMigratorConsole());
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

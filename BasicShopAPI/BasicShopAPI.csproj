@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="15.0.1" />
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentMigrator" Version="7.1.0" />
     <PackageReference Include="FluentMigrator.Runner" Version="7.1.0" />
     <PackageReference Include="FluentMigrator.Runner.SqlServer" Version="7.1.0" />
@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\" />
     <Folder Include="API\" />
+    <Folder Include="Application\DTOs\" />
   </ItemGroup>
 
 </Project>

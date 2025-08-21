@@ -1,33 +1,48 @@
 ﻿using BasicShopAPI.Domain.Entities;
 using BasicShopAPI.Domain.Interfaces;
+using BasicShopAPI.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace BasicShopAPI.Infrastructure.Repositories
 {
-    public class ProductRepository : IProductoRepository
+    public class ProductRepository : IProductRepository
     {
-        public Task Add(Product product)
+        private readonly ApplicationDbContext _context;
+
+        #region Constructor
+
+        public ProductRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            this._context = context;
         }
 
-        public Task Delete(Guid id)
+        #endregion
+
+        public async Task Add(Product product)
         {
-            throw new NotImplementedException();
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<List<Product>> GetAll()
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            await _context.Products.Where(x => x.Id == id).ExecuteDeleteAsync();
         }
 
-        public Task<Product?> GetById(Guid id)
+        public async Task<List<Product>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Products.AsNoTracking().ToListAsync();
         }
 
-        public Task Update(Product product)
+        public async Task<Product?> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task Update(Product product)
+        {
+            _context.Update<Product>(product);
+            await _context.SaveChangesAsync();
         }
     }
 }

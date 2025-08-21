@@ -1,4 +1,6 @@
+using BasicShopAPI.Infrastructure.Persistence;
 using FluentMigrator.Runner;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,8 @@ builder.Services.AddFluentMigratorCore()
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("name=DefaultConnection", options => options.UseCompatibilityLevel(120)));
 
 var app = builder.Build();
 

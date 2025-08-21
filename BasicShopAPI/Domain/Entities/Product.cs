@@ -29,5 +29,19 @@ namespace BasicShopAPI.Domain.Entities
             Price = price;
             Stock = stock;
         }
+
+        public void DecreaseStock(int quantity)
+        {
+            if (quantity <= 0) throw new ArgumentException("Invalid quantity");
+            if (Stock < quantity) throw new InvalidOperationException("Insufficient stock");
+
+            Stock -= quantity;
+        }
+
+        public void IncreaseStock(int quantity)
+        {
+            if (quantity <= 0) throw new ArgumentException("Invalid quantity");
+            Stock += quantity;
+        }
     }
 }

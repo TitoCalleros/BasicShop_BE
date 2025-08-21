@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="API\" />
+    <Folder Include="Application\CQRS\Handlers\" />
   </ItemGroup>
 
 </Project>

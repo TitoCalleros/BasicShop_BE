@@ -1,4 +1,6 @@
+using BasicShopAPI.Domain.Interfaces;
 using BasicShopAPI.Infrastructure.Persistence;
+using BasicShopAPI.Infrastructure.Repositories;
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,8 @@ builder.Services.AddFluentMigratorCore()
     .AddLogging(log => log.AddFluentMigratorConsole());
 
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

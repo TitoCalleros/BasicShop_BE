@@ -1,0 +1,21 @@
+﻿using BasicShopAPI.Application.CQRS.Queries.Products;
+using BasicShopAPI.Domain.Entities;
+using BasicShopAPI.Domain.Interfaces;
+
+namespace BasicShopAPI.Application.CQRS.Handlers.Products
+{
+    public class GetAllProductsHandler
+    {
+        private readonly IProductRepository _repo;
+
+        public GetAllProductsHandler(IProductRepository repo)
+        {
+            this._repo = repo;
+        }
+
+        public async Task<IEnumerable<Product>> Handle(GetAllProductsQuery query)
+        {
+            return await _repo.GetAll();
+        }
+    }
+}

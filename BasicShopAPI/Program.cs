@@ -1,3 +1,4 @@
+using BasicShopAPI.API.Mapping;
 using BasicShopAPI.Domain.Interfaces;
 using BasicShopAPI.Infrastructure.Persistence;
 using BasicShopAPI.Infrastructure.Repositories;
@@ -16,7 +17,8 @@ builder.Services.AddFluentMigratorCore()
         .ScanIn(typeof(Program).Assembly).For.Migrations())
     .AddLogging(log => log.AddFluentMigratorConsole());
 
-builder.Services.AddAutoMapper(typeof(Program));
+// Assembly scanning automatically includes other profiles.
+builder.Services.AddAutoMapper(typeof(ProductsProfile).Assembly);
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 

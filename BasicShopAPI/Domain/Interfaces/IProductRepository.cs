@@ -2,7 +2,7 @@
 
 namespace BasicShopAPI.Domain.Interfaces
 {
-    public interface IProductoRepository
+    public interface IProductRepository
     {
 
         Task<Product?> GetById(Guid id);

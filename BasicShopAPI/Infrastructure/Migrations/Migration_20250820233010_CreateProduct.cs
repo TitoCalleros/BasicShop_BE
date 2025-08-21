@@ -11,8 +11,8 @@ namespace BasicShopAPI.Infrastructure.Migrations
         {
             Create.Table(_tableName)
                 .WithColumn("Id").AsGuid().PrimaryKey().Identity()
-                .WithColumn("Name").AsString(150).NotNullable()
-                .WithColumn("Description").AsString(500).Nullable()
+                .WithColumn("Name").AsString(50).NotNullable()
+                .WithColumn("Description").AsString(250).Nullable()
                 .WithColumn("Price").AsDecimal(10, 2).NotNullable()
                 .WithColumn("Stock").AsInt32().NotNullable().WithDefaultValue(0)
                 .WithColumn("CreatedAt").AsDateTime().NotNullable()

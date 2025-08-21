@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BasicShopAPI.Application.DTOs.Products
+namespace BasicShopAPI.API.DTOs.Products
 {
     public record CreateProductRequestDTO(
         [property: Required, StringLength(50)] string Name,

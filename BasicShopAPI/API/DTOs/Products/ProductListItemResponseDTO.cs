@@ -1,4 +1,4 @@
-﻿namespace BasicShopAPI.Application.DTOs.Products
+﻿namespace BasicShopAPI.API.DTOs.Products
 {
     public record ProductListItemResponseDTO(
         int Id,

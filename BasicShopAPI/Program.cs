@@ -12,11 +12,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration)
+    .AddCorsPolicies(builder.Configuration)
     .AddControllers();
 
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+app.UseCorsPolicies();
 
 // Configure runner for the migrations
 using (var scope = app.Services.CreateScope())

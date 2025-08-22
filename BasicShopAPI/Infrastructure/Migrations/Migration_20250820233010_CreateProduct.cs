@@ -10,7 +10,7 @@ namespace BasicShopAPI.Infrastructure.Migrations
         public override void Up()
         {
             Create.Table(_tableName)
-                .WithColumn("Id").AsGuid().PrimaryKey().Identity()
+                .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
                 .WithColumn("Name").AsString(50).NotNullable()
                 .WithColumn("Description").AsString(250).Nullable()
                 .WithColumn("Price").AsDecimal(10, 2).NotNullable()

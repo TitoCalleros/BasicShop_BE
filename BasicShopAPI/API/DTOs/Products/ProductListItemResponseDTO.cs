@@ -1,7 +1,7 @@
 ﻿namespace BasicShopAPI.API.DTOs.Products
 {
     public record ProductListItemResponseDTO(
-        int Id,
+        Guid Id,
         string Name,
         decimal Price,
         int Stock

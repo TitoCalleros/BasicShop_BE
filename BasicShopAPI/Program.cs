@@ -1,5 +1,4 @@
 using BasicShopAPI;
-using BasicShopAPI.Infrastructure.Persistence;
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 

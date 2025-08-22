@@ -11,7 +11,8 @@ namespace BasicShopAPI.API.Mapping
         {
             // From Request -> Commands
             CreateMap<CreateProductRequestDTO, CreateProductCommand>();
-            CreateMap<UpdateProductRequestDTO, UpdateProductCommand>();
+            CreateMap<UpdateProductRequestDTO, UpdateProductCommand>()
+                .ForCtorParam("Id", opt => opt.MapFrom((src, ctx) => (Guid)ctx.Items["Id"]));
 
             // Form Entities -> Response
             CreateMap<Product, ProductResponseDTO>();

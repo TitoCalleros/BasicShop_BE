@@ -1,3 +1,4 @@
+using BasicShopAPI;
 using BasicShopAPI.API.Mapping;
 using BasicShopAPI.Application.CQRS.Handlers.Products;
 using BasicShopAPI.Domain.Interfaces;
@@ -8,28 +9,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
 
-builder.Services.AddFluentMigratorCore()
-    .ConfigureRunner(rn => rn.AddSqlServer2012()
-        .WithGlobalConnectionString(connectionString)
-        .ScanIn(typeof(Program).Assembly).For.Migrations())
-    .AddLogging(log => log.AddFluentMigratorConsole());
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration)
+    .AddControllers();
 
-// Assembly scanning automatically includes other profiles.
-builder.Services.AddAutoMapper(typeof(ProductsProfile).Assembly);
-
-builder.Services.AddScoped<CreateProductHandler>();
-builder.Services.AddScoped<UpdateProductHandler>();
-builder.Services.AddScoped<DeleteProductHandler>();
-builder.Services.AddScoped<GetAllProductsHandler>();
-builder.Services.AddScoped<GetProductByIdHandler>();
-
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-
-builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -50,10 +39,6 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-//app.UseHttpsRedirection();
-
-//app.UseAuthorization();
 
 app.MapControllers();
 

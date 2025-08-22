@@ -37,7 +37,15 @@ app.MapGet("/", () => "Migrations applied");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.MapOpenApi("/openapi/v1.json");
+
+    // Swagger UI leyendo el documento nativo
+    app.UseSwaggerUI(opt =>
+    {
+        opt.SwaggerEndpoint("/openapi/v1.json", "BasicShopAPI v1");
+        // opcional: servir la UI en /swagger (por defecto ya es /swagger)
+        opt.RoutePrefix = "swagger";
+    });
 }
 
 app.MapControllers();

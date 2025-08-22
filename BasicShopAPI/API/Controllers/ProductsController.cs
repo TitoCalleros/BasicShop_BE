@@ -4,7 +4,6 @@ using BasicShopAPI.Application.CQRS.Commands.Products;
 using BasicShopAPI.Application.CQRS.Handlers.Products;
 using BasicShopAPI.Application.CQRS.Queries.Products;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
 
 namespace BasicShopAPI.API.Controllers
 {
@@ -58,17 +57,18 @@ namespace BasicShopAPI.API.Controllers
 
             var qryGet = new GetProductByIdQuery(newId);
             var created = await _getByIdHandler.Handle(qryGet);
+
             var dto = _mapper.Map<ProductResponseDTO>(created);
-            return CreatedAtRoute("GetById", new { id = newId }, dto);
+            return CreatedAtRoute("GetById", new { id = newId }, dto);            
         }
 
-        [HttpPut]
+        [HttpPut("{id:guid}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateProductRequestDTO request, CancellationToken ct)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var cmd = _mapper.Map<UpdateProductCommand>(request);
+            var cmd = _mapper.Map<UpdateProductCommand>(request, opt => opt.Items["Id"] = id);           
 
             try
             {

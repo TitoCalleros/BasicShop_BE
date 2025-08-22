@@ -1,4 +1,5 @@
 using BasicShopAPI.API.Mapping;
+using BasicShopAPI.Application.CQRS.Handlers.Products;
 using BasicShopAPI.Domain.Interfaces;
 using BasicShopAPI.Infrastructure.Persistence;
 using BasicShopAPI.Infrastructure.Repositories;
@@ -19,6 +20,12 @@ builder.Services.AddFluentMigratorCore()
 
 // Assembly scanning automatically includes other profiles.
 builder.Services.AddAutoMapper(typeof(ProductsProfile).Assembly);
+
+builder.Services.AddScoped<CreateProductHandler>();
+builder.Services.AddScoped<UpdateProductHandler>();
+builder.Services.AddScoped<DeleteProductHandler>();
+builder.Services.AddScoped<GetAllProductsHandler>();
+builder.Services.AddScoped<GetProductByIdHandler>();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 

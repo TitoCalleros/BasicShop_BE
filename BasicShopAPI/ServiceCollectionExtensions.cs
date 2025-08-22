@@ -15,6 +15,7 @@ namespace BasicShopAPI
 
             services.AddAutoMapper(appAssembly);
 
+            // Register all dependencies to classes whose name ends with "Handler"
             services.Scan(scan => scan
                 .FromAssemblies(appAssembly)
                 .AddClasses(c => c.Where(t => t.Name.EndsWith("Handler")))
@@ -37,6 +38,7 @@ namespace BasicShopAPI
                     .ScanIn(typeof(ApplicationDbContext).Assembly).For.Migrations())
                 .AddLogging(log => log.AddFluentMigratorConsole());
 
+            // Inject all dependencies for Repositories
             services.Scan(scan => scan
                 .FromAssemblyOf<ProductRepository>()
                 .AddClasses(c => c.Where(t => t.Name.EndsWith("Repository")))

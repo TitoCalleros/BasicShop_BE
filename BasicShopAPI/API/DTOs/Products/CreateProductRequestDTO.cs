@@ -2,11 +2,18 @@
 
 namespace BasicShopAPI.API.DTOs.Products
 {
-    public record CreateProductRequestDTO(
-        [property: Required, StringLength(50)] string Name,
-        [property: StringLength(150)] string? Description,
-        [property: Required, Range(0.01, double.MaxValue)] decimal Price,
-        [property: Range(1, int.MaxValue)] int Stock
-    );
+    public record CreateProductRequestDTO
+    {
+        [Required, StringLength(50)]
+        public required string Name { get; set; }
+
+        [StringLength(150)]
+        public string? Description { get; set; }
+        [Required, Range(0.01, double.MaxValue)]
+        public decimal Price { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int Stock { get; set; }
+    }
     
 }

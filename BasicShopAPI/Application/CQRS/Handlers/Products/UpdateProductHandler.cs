@@ -3,14 +3,9 @@ using BasicShopAPI.Domain.Interfaces;
 
 namespace BasicShopAPI.Application.CQRS.Handlers.Products
 {
-    public class UpdateProductHandler
+    public class UpdateProductHandler(IProductRepository repo)
     {
-        private readonly IProductRepository _repo;
-
-        public UpdateProductHandler(IProductRepository repo)
-        {
-            this._repo = repo;
-        }
+        private readonly IProductRepository _repo = repo;
 
         public async Task Handle(UpdateProductCommand cmd)
         {

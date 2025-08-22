@@ -3,14 +3,9 @@ using BasicShopAPI.Domain.Interfaces;
 
 namespace BasicShopAPI.Application.CQRS.Handlers.Products
 {
-    public class DeleteProductHandler
+    public class DeleteProductHandler(IProductRepository repo)
     {
-        private readonly IProductRepository _repo;
-
-        public DeleteProductHandler(IProductRepository repo)
-        {
-            this._repo = repo;
-        }
+        private readonly IProductRepository _repo = repo;
 
         public async Task Handle(DeleteProductCommand cmd)
         {

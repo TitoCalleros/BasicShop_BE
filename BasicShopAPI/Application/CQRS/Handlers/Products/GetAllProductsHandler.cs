@@ -4,14 +4,9 @@ using BasicShopAPI.Domain.Interfaces;
 
 namespace BasicShopAPI.Application.CQRS.Handlers.Products
 {
-    public class GetAllProductsHandler
+    public class GetAllProductsHandler(IProductRepository repo)
     {
-        private readonly IProductRepository _repo;
-
-        public GetAllProductsHandler(IProductRepository repo)
-        {
-            this._repo = repo;
-        }
+        private readonly IProductRepository _repo = repo;
 
         public async Task<IEnumerable<Product>> Handle(GetAllProductsQuery query)
         {

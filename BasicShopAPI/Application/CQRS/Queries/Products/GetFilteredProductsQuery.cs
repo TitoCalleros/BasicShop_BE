@@ -1,0 +1,4 @@
+﻿namespace BasicShopAPI.Application.CQRS.Queries.Products
+{
+    public record GetFilteredProductsQuery(int Page = 1, int PageSize = 10, string? Search = null, string? Sort = null );
+}

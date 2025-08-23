@@ -15,6 +15,7 @@ namespace BasicShopAPI.Infrastructure.Migrations
                 .WithColumn("Description").AsString(250).Nullable()
                 .WithColumn("Price").AsDecimal(10, 2).NotNullable()
                 .WithColumn("Stock").AsInt32().NotNullable().WithDefaultValue(0)
+                .WithColumn("Gender").AsString(10).NotNullable()
                 .WithColumn("CreatedAt").AsDateTime().NotNullable()
                     .WithDefault(SystemMethods.CurrentDateTime);
 

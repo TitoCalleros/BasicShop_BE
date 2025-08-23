@@ -14,6 +14,9 @@ namespace BasicShopAPI.API.DTOs.Products
 
         [Range(1, int.MaxValue)]
         public int Stock { get; set; }
+
+        [Required, AllowedValues("men", "women", "kids")]
+        public required string Gender { get; set; } 
     }
     
 }

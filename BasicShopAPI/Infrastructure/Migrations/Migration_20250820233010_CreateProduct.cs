@@ -23,7 +23,12 @@ namespace BasicShopAPI.Infrastructure.Migrations
             Execute.Sql($"ALTER TABLE {_tableName} ADD CONSTRAINT CK_{_tableName}_Stock_NonNegative CHECK (Stock >= 0)");
 
             Create.Index($"IX_{_tableName}_Name")
-                .OnTable(_tableName).OnColumn("Name").Ascending();           
+                .OnTable(_tableName).OnColumn("Name").Ascending();   
+            
+            Create.Index($"IX_{_tableName}_Gender")
+                .OnTable(_tableName)
+                .OnColumn("Gender").Ascending()
+                .WithOptions().NonClustered();
         }
 
         public override void Down()

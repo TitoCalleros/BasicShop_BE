@@ -53,24 +53,11 @@ namespace BasicShopAPI
             var origins = config.GetSection("Cors:AllowedOrigins").Get<string[]>();
 
             services.AddCors(opt =>
-            {
-                // Política para desarrollo sin credenciales (simple)
+            {                
                 opt.AddPolicy("DevAll", p => p
                     .AllowAnyOrigin()
                     .AllowAnyHeader()
-                    .AllowAnyMethod());
-
-                //// Política con credenciales/orígenes explícitos
-                //opt.AddPolicy("WithCreds", p =>
-                //{
-                //    if (origins is { Length: > 0 })
-                //    {
-                //        p.WithOrigins(origins)
-                //         .AllowAnyHeader()
-                //         .AllowAnyMethod()
-                //         .AllowCredentials();
-                //    }
-                //});
+                    .AllowAnyMethod());                
             });
 
             return services;

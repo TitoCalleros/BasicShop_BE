@@ -14,8 +14,7 @@ namespace BasicShopAPI.API.DTOs.Products
         public string? Search { get; init; }
                 
         public ProductSort? Sort { get; init; }
-
-        [AllowedValues("men", "women", "kids")]
+                
         public string? Gender { get; set; }
     }
 }

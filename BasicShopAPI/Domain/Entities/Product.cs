@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace BasicShopAPI.Domain.Entities
+﻿namespace BasicShopAPI.Domain.Entities
 {
     public class Product
     {
@@ -10,10 +8,11 @@ namespace BasicShopAPI.Domain.Entities
         public string? Description { get; private set; }
         public decimal Price { get; private set; }
         public int Stock { get; private set; }        
+        public string Gender { get; private set; }
 
-        public Product(string name, string? description, decimal price, int stock) => Update(name, description, price, stock);
+        public Product(string name, string? description, decimal price, int stock, string gender) => Update(name, description, price, stock, gender);
 
-        public void Update(string name, string? description, decimal price, int stock)
+        public void Update(string name, string? description, decimal price, int stock, string gender)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Name cannot be null");
@@ -28,6 +27,7 @@ namespace BasicShopAPI.Domain.Entities
             Description = description;
             Price = price;
             Stock = stock;
+            Gender = gender;
         }
 
         public void DecreaseStock(int quantity)

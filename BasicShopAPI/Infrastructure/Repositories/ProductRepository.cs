@@ -62,6 +62,15 @@ namespace BasicShopAPI.Infrastructure.Repositories
                     EF.Functions.Like((p.Description ?? "").ToLower(), $"%{s}%"));
             }
 
+            if (!string.IsNullOrWhiteSpace(filter.Gender))
+            {
+                var g = filter.Gender.Trim().ToLower();
+                if (!new[] { "men", "women", "kids" }.Contains(g))
+                    throw new ArgumentException("Gender must be one of: men, women, kids");
+                q = q.Where(p => p.Gender == g);
+
+            }
+
             // Sort
             q = filter.Sort switch
             {

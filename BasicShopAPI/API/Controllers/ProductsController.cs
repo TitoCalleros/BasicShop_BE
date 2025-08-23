@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BasicShopAPI.API.DTOs.Common;
 using BasicShopAPI.API.DTOs.Products;
 using BasicShopAPI.Application.CQRS.Commands.Products;
 using BasicShopAPI.Application.CQRS.Handlers.Products;
@@ -16,15 +17,17 @@ namespace BasicShopAPI.API.Controllers
         private readonly DeleteProductHandler _deleteHandler;
         private readonly GetProductByIdHandler _getByIdHandler;
         private readonly GetAllProductsHandler _getAllHandler;
+        private readonly GetFilteredProductsHandler _getFilteredHandler;
         private readonly IMapper _mapper;
 
-        public ProductsController(CreateProductHandler createHandler, UpdateProductHandler updateHandler, DeleteProductHandler deleteHandler, GetProductByIdHandler getByIdHandler, GetAllProductsHandler getAllHandler, IMapper mapper )
+        public ProductsController(CreateProductHandler createHandler, UpdateProductHandler updateHandler, DeleteProductHandler deleteHandler, GetProductByIdHandler getByIdHandler, GetAllProductsHandler getAllHandler, GetFilteredProductsHandler getFilteredHandler, IMapper mapper )
         {
             this._createHandler = createHandler;
             this._updateHandler = updateHandler;
             this._deleteHandler = deleteHandler;
             this._getByIdHandler = getByIdHandler;
             this._getAllHandler = getAllHandler;
+            this._getFilteredHandler = getFilteredHandler;
             this._mapper = mapper;
         }
 
@@ -36,6 +39,19 @@ namespace BasicShopAPI.API.Controllers
             return products.Any()
                 ? _mapper.Map<IEnumerable<ProductResponseDTO>>(products)
                 : [];
+        }
+
+        [HttpGet("filtered")]
+        public async Task<IActionResult> GetFiltered([FromQuery] ProductQueryParams query, CancellationToken ct)
+        {
+            var result = await _getFilteredHandler.Handle(
+                new GetFilteredProductsQuery(query.Page, query.PageSize, query.Search, query.Sort));
+
+            var itemsDto = _mapper.Map<IReadOnlyList<ProductListItemResponseDTO>>(result.Items);
+
+            var paged = new PagedResultDTO<ProductListItemResponseDTO>(itemsDto, result.Page, result.PageSize, result.TotalCount, (int)Math.Ceiling(result.TotalCount / (double)result.PageSize));
+
+            return Ok(paged);
         }
 
         [HttpGet("{id:guid}", Name = "GetById")]

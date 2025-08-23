@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi("/openapi/v1.json");
 
-    // Swagger configuration
+    // Swagger configuration    
     app.UseSwaggerUI(opt =>
     {
         opt.SwaggerEndpoint("/openapi/v1.json", "BasicShopAPI v1");        

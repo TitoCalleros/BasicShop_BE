@@ -63,14 +63,12 @@ namespace BasicShopAPI.Infrastructure.Repositories
             }
 
             // Sort
-            q = (filter.Sort?.ToLower()) switch
+            q = filter.Sort switch
             {
-                "name:asc" => q.OrderBy(p => p.Name),
-                "name:desc" => q.OrderByDescending(p => p.Name),
-                "price:asc" => q.OrderBy(p => p.Price),
-                "price:desc" => q.OrderByDescending(p => p.Price),
-                "stock:asc" => q.OrderBy(p => p.Stock),
-                "stock:desc" => q.OrderByDescending(p => p.Stock),
+                ProductSort.NameAsc => q.OrderBy(p => p.Name),
+                ProductSort.NameDesc => q.OrderByDescending(p => p.Name),
+                ProductSort.PriceAsc => q.OrderBy(p => p.Price),
+                ProductSort.PriceDesc => q.OrderByDescending(p => p.Price),                
                 _ => q.OrderBy(p => p.Id) 
             };
 

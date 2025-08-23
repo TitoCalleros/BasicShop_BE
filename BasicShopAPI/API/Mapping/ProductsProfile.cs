@@ -15,7 +15,7 @@ namespace BasicShopAPI.API.Mapping
                 .ForCtorParam("Id", opt => opt.MapFrom((src, ctx) => (Guid)ctx.Items["Id"]));
 
             // Form Entities -> Response
-            CreateMap<Product, ProductResponseDTO>();
+            CreateMap<Product, ProductResponseDTO>();            
             CreateMap<Product, ProductListItemResponseDTO>();
         }
     }

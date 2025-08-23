@@ -19,6 +19,7 @@ namespace BasicShopAPI.API.Controllers
         private readonly GetAllProductsHandler _getAllHandler;
         private readonly GetFilteredProductsHandler _getFilteredHandler;
         private readonly IMapper _mapper;
+        private List<string> _genderAllowedValues = ["men", "women", "kids"];
 
         public ProductsController(CreateProductHandler createHandler, UpdateProductHandler updateHandler, DeleteProductHandler deleteHandler, GetProductByIdHandler getByIdHandler, GetAllProductsHandler getAllHandler, GetFilteredProductsHandler getFilteredHandler, IMapper mapper )
         {
@@ -44,8 +45,16 @@ namespace BasicShopAPI.API.Controllers
         [HttpGet("filtered")]
         public async Task<IActionResult> GetFiltered([FromQuery] ProductQueryParams query, CancellationToken ct)
         {
-            var result = await _getFilteredHandler.Handle(
-                new GetFilteredProductsQuery(query.Page, query.PageSize, query.Search, query.Sort, query.Gender));
+            var gender = string.IsNullOrWhiteSpace(query.Gender) ? null : query.Gender;
+                        
+            if (gender is not null && !_genderAllowedValues.Contains(gender))
+                return BadRequest($"Gender must be one of: {string.Join(", ", _genderAllowedValues)}");
+
+            var queryFiltered = new GetFilteredProductsQuery(
+                query.Page, query.PageSize, query.Search, query.Sort, gender
+            );
+
+            var result = await _getFilteredHandler.Handle(queryFiltered);
 
             var itemsDto = _mapper.Map<IReadOnlyList<ProductListItemResponseDTO>>(result.Items);
 

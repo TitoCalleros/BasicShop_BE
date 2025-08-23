@@ -14,6 +14,7 @@ namespace BasicShopAPI.API.Validations
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             if (value is null) return ValidationResult.Success;
+            if (value is string s && string.IsNullOrWhiteSpace(s)) return ValidationResult.Success;
 
             if (value is string str && _allowed.Contains(str.ToLower()))
                 return ValidationResult.Success;

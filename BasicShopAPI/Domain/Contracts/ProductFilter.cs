@@ -10,5 +10,7 @@ namespace BasicShopAPI.Domain.Contracts
         public string? Search { get; init; }
                 
         public ProductSort? Sort { get; init; }
+
+        public string? Gender { get; init; }
     }
 }

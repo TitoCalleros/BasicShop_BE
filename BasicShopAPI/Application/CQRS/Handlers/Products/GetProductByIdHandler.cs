@@ -10,7 +10,7 @@ namespace BasicShopAPI.Application.CQRS.Handlers.Products
 
         public async Task<Product?> Handle(GetProductByIdQuery query)
         {
-            return await _repo.GetById(query.id);
+            return await _repo.GetById(query.Id);
         }
     }
 }

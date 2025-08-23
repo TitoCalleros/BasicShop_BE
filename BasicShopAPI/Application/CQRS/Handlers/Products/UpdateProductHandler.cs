@@ -11,7 +11,7 @@ namespace BasicShopAPI.Application.CQRS.Handlers.Products
         {
             var productoDb = await _repo.GetById(cmd.Id) ?? throw new KeyNotFoundException("Product id not found");
 
-            productoDb.Update(cmd.Name, cmd.Description, cmd.Price, cmd.Stock);
+            productoDb.Update(cmd.Name, cmd.Description, cmd.Price, cmd.Stock, cmd.Gender);
             await _repo.Update(productoDb);
         }
     }

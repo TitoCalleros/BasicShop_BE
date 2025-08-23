@@ -17,6 +17,7 @@ namespace BasicShopAPI.Application.CQRS.Handlers.Products
                 PageSize = query.PageSize,
                 Search = query.Search,
                 Sort = query.Sort,
+                Gender = query.Gender,
             };
 
             var (items, total) = await _repo.GetPaged(filter);

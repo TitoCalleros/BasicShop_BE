@@ -45,7 +45,7 @@ namespace BasicShopAPI.API.Controllers
         public async Task<IActionResult> GetFiltered([FromQuery] ProductQueryParams query, CancellationToken ct)
         {
             var result = await _getFilteredHandler.Handle(
-                new GetFilteredProductsQuery(query.Page, query.PageSize, query.Search, query.Sort));
+                new GetFilteredProductsQuery(query.Page, query.PageSize, query.Search, query.Sort, query.Gender));
 
             var itemsDto = _mapper.Map<IReadOnlyList<ProductListItemResponseDTO>>(result.Items);
 

@@ -1,17 +1,11 @@
 ﻿namespace BasicShopAPI.API.DTOs.Common
 {
-    public record PagedResult<T>(
-        IReadOnlyList<T> Items,
-        int Page,
-        int PageSize,
-        int TotalCount,
-        int TotalPages
-    )
-    { 
-        public static PagedResult<T> Create(IReadOnlyList<T> items, int page, int PageSize, int totalCount)
-        {
-            var totalPages = (int)Math.Ceiling(totalCount / (double)PageSize);
-            return new PagedResult<T>(items, page, PageSize, totalCount, Math.Max(totalPages, 1));
-        }
+    public record PagedResult<T>
+    {
+        public required IReadOnlyList<T> Items { get; set; }
+        public required int Page { get; set; }
+        public required int PageSize { get; set; }
+        public required int TotalCount { get; set; }
+        public int TotalPages => (int)Math.Ceiling(TotalCount / (double)PageSize);
     }
 }

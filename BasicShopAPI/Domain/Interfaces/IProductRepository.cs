@@ -1,4 +1,5 @@
-﻿using BasicShopAPI.Domain.Entities;
+﻿using BasicShopAPI.Domain.Contracts;
+using BasicShopAPI.Domain.Entities;
 
 namespace BasicShopAPI.Domain.Interfaces
 {
@@ -10,5 +11,6 @@ namespace BasicShopAPI.Domain.Interfaces
         Task Add(Product product);
         Task Update(Product product);
         Task Delete(Guid id);
+        Task<(IReadOnlyList<Product> Items, int TotalCount)> GetPaged(ProductFilter filter);
     }
 }

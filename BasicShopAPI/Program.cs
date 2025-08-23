@@ -13,9 +13,8 @@ builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration)
     .AddCorsPolicies(builder.Configuration)
+    .AddOpenApi()
     .AddControllers();
-
-builder.Services.AddOpenApi();
 
 var app = builder.Build();
 

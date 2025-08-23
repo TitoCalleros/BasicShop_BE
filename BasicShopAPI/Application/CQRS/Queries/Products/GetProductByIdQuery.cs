@@ -1,4 +1,4 @@
 ﻿namespace BasicShopAPI.Application.CQRS.Queries.Products
 {
-    public record GetProductByIdQuery(Guid id);
+    public record GetProductByIdQuery(Guid Id);
 }

@@ -1,6 +1,6 @@
 ﻿namespace BasicShopAPI.Domain.Contracts
 {
-    public record PagedResult<T>
+    public record QueryPagedResult<T>
     {
         public required IReadOnlyList<T> Items { get; set; }
         public required int Page { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace BasicShopAPI.API.DTOs.Common
+﻿namespace BasicShopAPI.Domain.Contracts
 {
     public record PagedResult<T>
     {

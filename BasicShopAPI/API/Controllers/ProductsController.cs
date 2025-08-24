@@ -107,7 +107,7 @@ namespace BasicShopAPI.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete (Guid id, CancellationToken ct)
         {
             try
